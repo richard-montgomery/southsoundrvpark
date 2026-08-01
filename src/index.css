@@ -1,13 +1,289 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #f6f4ef;
+  --ink: #1f2a1f;
+  --muted: #6b6558;
+  --border: #ddd7cb;
+  --card-bg: #ffffff;
+
+  --available: #3f7d4c;
+  --available-bg: #e6f2e8;
+  --available-border: #a9d2af;
+
+  --occupied: #8c8577;
+  --occupied-bg: #ece8e0;
+  --occupied-border: #d6d0c3;
+
+  --river: #3e6d8e;
+
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.app-header h1 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 0;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* --- Space grid ("lot map") --- */
+
+.space-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.space-tile {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.space-tile:hover {
+  transform: translateY(-1px);
+}
+
+.space-tile:focus-visible {
+  outline: 3px solid var(--river);
+  outline-offset: 2px;
+}
+
+.space-tile.is-available {
+  background: var(--available-bg);
+  color: var(--available);
+  border-color: var(--available-border);
+}
+
+.space-tile.is-occupied {
+  background: var(--occupied-bg);
+  color: var(--occupied);
+  border-color: var(--occupied-border);
+}
+
+.space-tile.is-selected {
+  border-color: var(--river);
+  box-shadow: 0 0 0 2px var(--river);
+}
+
+/* --- Details card --- */
+
+.details-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.details-card--empty {
+  text-align: left;
+}
+
+.details-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.details-header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.status-pill {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.status-pill.is-available {
+  background: var(--available-bg);
+  color: var(--available);
+}
+
+.status-pill.is-occupied {
+  background: var(--occupied-bg);
+  color: var(--occupied);
+}
+
+.details-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--available);
+}
+
+.price-period {
+  color: var(--muted);
+}
+
+.details-list {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.details-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.75rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.details-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.details-row dt {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.details-row dd {
+  margin: 0;
+}
+
+.details-note {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* --- Contact footer --- */
+
+.app-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.footer-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-value {
+  color: var(--river);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-value:hover {
+  text-decoration: underline;
+}
+
+/* --- Responsive: mobile stacks grid above details --- */
+
+@media (max-width: 800px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .space-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .details-card {
+    position: static;
+  }
+}
+
+@media (max-width: 420px) {
+  .space-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.45rem;
+    padding: 1rem;
+  }
+
+  .space-tile {
+    font-size: 0.9rem;
+  }
 }
