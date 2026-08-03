@@ -69,7 +69,7 @@ export default function SpaceDetails({ space }) {
         </>
       ) : (
         <p className="muted">
-          This space is currently occupied. Select a green space on the map
+          This space is currently occupied. Select a teal space on the map
           to see availability.
         </p>
       )}
