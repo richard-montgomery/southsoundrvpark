@@ -25,6 +25,14 @@ export default function App() {
         <p className="muted">
           {availableCount} of {spaces.length} spaces open
         </p>
+        <div className="legend">
+          <span className="legend-item">
+            <span className="legend-swatch is-available"></span> Available
+          </span>
+          <span className="legend-item">
+            <span className="legend-swatch is-occupied"></span> Occupied
+          </span>
+        </div>
       </header>
 
       <main className="app-main">

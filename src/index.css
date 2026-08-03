@@ -7,15 +7,15 @@
   --border: #ddd7cb;
   --card-bg: #ffffff;
 
-  --available: #3f7d4c;
-  --available-bg: #e6f2e8;
-  --available-border: #a9d2af;
+  --available: #1f6f8b;
+  --available-bg: #e4eef2;
+  --available-border: #9dc0cf;
 
   --occupied: #8c8577;
   --occupied-bg: #ece8e0;
   --occupied-border: #d6d0c3;
 
-  --river: #3e6d8e;
+  --selected: #c1502e;
 
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-body: "Source Sans 3", system-ui, sans-serif;
@@ -64,6 +64,39 @@ body {
   margin: 0;
 }
 
+.legend {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.6rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.legend-swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 4px;
+}
+
+.legend-swatch.is-available {
+  background: var(--available-bg);
+  border: 1.5px solid var(--available-border);
+}
+
+.legend-swatch.is-occupied {
+  background: var(--occupied-bg);
+  border: 1.5px solid var(--occupied-border);
+}
+
 .app-main {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -84,6 +117,7 @@ body {
 }
 
 .space-tile {
+  position: relative;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -102,7 +136,7 @@ body {
 }
 
 .space-tile:focus-visible {
-  outline: 3px solid var(--river);
+  outline: 3px solid var(--selected);
   outline-offset: 2px;
 }
 
@@ -110,17 +144,20 @@ body {
   background: var(--available-bg);
   color: var(--available);
   border-color: var(--available-border);
+  border-style: solid;
 }
 
 .space-tile.is-occupied {
   background: var(--occupied-bg);
   color: var(--occupied);
   border-color: var(--occupied-border);
+  border-style: solid;
 }
 
 .space-tile.is-selected {
-  border-color: var(--river);
-  box-shadow: 0 0 0 2px var(--river);
+  border-color: var(--selected);
+  border-style: solid;
+  box-shadow: 0 0 0 2px var(--selected);
 }
 
 /* --- Details card --- */
@@ -251,7 +288,7 @@ body {
 }
 
 .footer-value {
-  color: var(--river);
+  color: var(--selected);
   text-decoration: none;
   font-weight: 500;
 }
