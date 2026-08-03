@@ -33,6 +33,9 @@ export default function App() {
             <span className="legend-swatch is-occupied"></span> Occupied
           </span>
         </div>
+        <p className="mobile-hint">
+          Tap a space, then scroll down for details and contact information.
+        </p>
       </header>
 
       <main className="app-main">

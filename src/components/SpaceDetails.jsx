@@ -61,6 +61,10 @@ export default function SpaceDetails({ space }) {
                 </span>
               </dd>
             </div>
+            <div className="details-row">
+              <dt>Sewer</dt>
+              <dd>{space.sewerHookup ? "Hookup included" : "No sewer hookup"}</dd>
+            </div>
           </dl>
         </>
       ) : (
