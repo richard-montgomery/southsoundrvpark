@@ -38,6 +38,10 @@ export default function SpaceDetails({ space }) {
               <dd>Up to {space.rvSize}</dd>
             </div>
             <div className="details-row">
+              <dt>Sewer</dt>
+              <dd>{space.sewerHookup ? "Hookup included" : "No sewer hookup"}</dd>
+            </div>
+            <div className="details-row">
               <dt>Vehicles</dt>
               <dd>{space.maxVehicles} max</dd>
             </div>
@@ -61,15 +65,13 @@ export default function SpaceDetails({ space }) {
                 </span>
               </dd>
             </div>
-            <div className="details-row">
-              <dt>Sewer</dt>
-              <dd>{space.sewerHookup ? "Hookup included" : "No sewer hookup"}</dd>
-            </div>
           </dl>
+
+          {space.caveat && <p className="details-caveat">* {space.caveat}</p>}
         </>
       ) : (
         <p className="muted">
-          This space is currently occupied. Select a teal space on the map
+          This space is currently occupied. Select a green space on the map
           to see availability.
         </p>
       )}
