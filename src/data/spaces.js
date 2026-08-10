@@ -16,8 +16,8 @@
 export const PET_RESTRICTIONS = ["Rottweilers", "German Shepherds", "Pitbulls"];
 
 const DEFAULTS = {
-  rvSize: "32'",
-  price: 750,
+  rvSize: "26'",
+  price: 735,
   maxVehicles: 2,
   maxPets: 2,
   maxPeople: 2,
@@ -30,14 +30,13 @@ const DEFAULTS = {
 // Every space starts from DEFAULTS and can override any field.
 // Demo data below marks a handful of spaces "available" — replace with
 // your real availability.
+
 const overrides = {
-  5: { status: "available", rvSize: "39'", price: 800 },
-  17: { status: "available", rvSize: "37'", price: 766 },
-  33: { status: "available" },
-  34: { status: "available" },
+  34: { status: "available", rvSize: "29'", price: 766 },
+  48: { status: "available" },
 };
 
-export const spaces = Array.from({ length: 46 }, (_, i) => {
+export const spaces = Array.from({ length: 49 }, (_, i) => {
   const number = i + 1;
   return {
     number,
